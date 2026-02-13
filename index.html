@@ -1,154 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>For My Love Bao Bao Zin Lay Nwe❤️</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: "Segoe UI", sans-serif;
-    }
-    body {
-      margin: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #ff5f9e, #ffc371);
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      text-align: center;
-    }
+<meta charset="UTF-8" />
+<title>For My Love Bao Bao Zin Lay Nwe ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    .card {
-      background: rgba(0,0,0,0.25);
-      padding: 30px 20px;
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-      max-width: 350px;
-      width: 90%;
-      animation: popIn 1s ease;
-    }
+<style>
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff5f9e, #ffc371);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+}
 
-    h1 {
-      margin-top: 0;
-      font-size: 2em;
-    }
+/* Cards */
+.card {
+  background: rgba(0,0,0,0.25);
+  padding: 30px 20px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  max-width: 350px;
+  width: 90%;
+  animation: popIn 1s ease;
+  z-index: 2;
+}
 
-    p {
-      font-size: 1.1em;
-      line-height: 1.6;
-    }
+.hidden { display: none; }
 
-    button {
-      margin-top: 20px;
-      padding: 12px 25px;
-      border: none;
-      border-radius: 30px;
-      font-size: 1em;
-      cursor: pointer;
-      background: #ff2f7d;
-      color: white;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
+h1 { margin-top: 0; font-size: 2em; }
+p { font-size: 1.1em; line-height: 1.6; }
 
-    button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-    }
+button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1em;
+  cursor: pointer;
+  background: #ff2f7d;
+  color: white;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
 
-    .hidden {
-      display: none;
-    }
+@keyframes popIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
 
-    @keyframes popIn {
-      0% { transform: scale(0.5); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
+/* Love photo */
+.love-photo {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 15px auto;
+  display: block;
+  border: 4px solid rgba(255,255,255,0.8);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
 
-    /* Hearts animation */
-    .heart {
-      position: absolute;
-      bottom: -20px;
-      font-size: 24px;
-      animation: floatUp 6s linear forwards;
-      opacity: 0.8;
-    }
+/* Hearts */
+.heart {
+  position: absolute;
+  bottom: -20px;
+  font-size: 24px;
+  animation: floatUp 6s linear forwards;
+  opacity: 0.8;
+  z-index: 1;
+}
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+}
 
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-110vh) scale(1.5);
-        opacity: 0;
-      }
-    }
+/* Video overlay */
+.video-overlay {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.5s ease; /* fade-in */
+}
+.video-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
 
-    /* Added love-photo CSS */
-    .love-photo {
-      width: 160px;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 50%;
-      margin: 15px auto;
-      display: block;
-      border: 4px solid rgba(255,255,255,0.8);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-    }
-  </style>
+/* Fullscreen video */
+.video-overlay video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Cinematic text */
+.video-text {
+  position: absolute;
+  bottom: 15%;
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.7);
+  animation: textFade 3s ease forwards;
+  opacity: 0;
+}
+@keyframes textFade {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 28px;
+  background: rgba(0,0,0,0.6);
+  border: none;
+  color: white;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+}
+.close-btn:hover {
+  background: rgba(0,0,0,0.9);
+}
+</style>
 </head>
 <body>
 
-  <div class="card" id="card1">
-    <h1>For Bao Bao Zin Lay Nwe ❤️</h1>
+<div class="card" id="card1">
+  <h1>For Bao Bao Zin Lay Nwe ❤️</h1>
+  <img src="her.jpg" alt="My Love" class="love-photo">
+  <button onclick="showSurprise()">Click Me 💖</button>
+</div>
 
-    <!-- Added image here -->
-    <img src="her.jpg" alt="My Love" class="love-photo">
+<div class="card hidden" id="card2">
+  <h1>💌 Surprise!</h1>
+  <p>
+    You are the best thing that ever happened to me.<br>
+    Every day with you is special, and I just want you to know…<br><br>
+    <strong>I love you so much ❤️</strong>
+  </p>
+  <button onclick="startLove()">Send You Love 💕</button>
+</div>
 
-   
-    <button onclick="showSurprise()">Click Me 💖</button>
+<!-- Video Overlay -->
+<div class="video-overlay" id="videoBox">
+  <video id="loveVideo" playsinline>
+    <source src="love.mp4" type="video/mp4">
+  </video>
+
+  <div class="video-text" id="videoText">
+    I Love You Forever ❤️
   </div>
 
-  <div class="card hidden" id="card2">
-    <h1>💌 Surprise!</h1>
-    <p>
-      You are the best thing that ever happened to me.<br>
-      Every day with you is special, and I just want you to know…<br><br>
-      <strong>I love you so much ❤️</strong>
-    </p>
-    <button onclick="startHearts()">Send You Love 💕</button>
-  </div>
+  <button class="close-btn" onclick="closeVideo()">✖</button>
+</div>
 
-  <script>
-    function showSurprise() {
-      document.getElementById("card1").classList.add("hidden");
-      document.getElementById("card2").classList.remove("hidden");
-    }
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-    function startHearts() {
-      setInterval(createHeart, 300);
-    }
+<script>
+function showSurprise() {
+  document.getElementById("card1").classList.add("hidden");
+  document.getElementById("card2").classList.remove("hidden");
+}
 
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerText = "❤️";
+function startLove() {
+  startHearts();
+  showVideo();
+}
 
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = (20 + Math.random() * 30) + "px";
+function startHearts() {
+  setInterval(createHeart, 300);
+}
 
-      document.body.appendChild(heart);
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerText = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (20 + Math.random() * 30) + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}
 
-      setTimeout(() => {
-        heart.remove();
-      }, 6000);
-    }
-  </script>
+function showVideo() {
+  const box = document.getElementById("videoBox");
+  const video = document.getElementById("loveVideo");
+  const music = document.getElementById("bgMusic");
+
+  box.classList.add("show");
+
+  video.currentTime = 0;
+  video.play();
+
+  music.volume = 0.6;
+  music.play();
+}
+
+function closeVideo() {
+  const box = document.getElementById("videoBox");
+  const video = document.getElementById("loveVideo");
+  const music = document.getElementById("bgMusic");
+
+  box.classList.remove("show");
+  video.pause();
+  music.pause();
+}
+</script>
 
 </body>
 </html>
-
-
